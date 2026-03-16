@@ -1,4 +1,4 @@
-import { createLauncherService } from "./launchers.service.js";
+import { createLauncherService, getAllService, getByIdService } from "./launchers.service.js";
 
 export const createLauncherHandler = async (req, res) => {
   try {
@@ -33,3 +33,43 @@ export const createLauncherHandler = async (req, res) => {
     });
   }
 };
+
+export const getAllHandler = async (req, res) => {
+  try {
+    const launchers = await getAllService();
+
+    return res.status(200).json({
+      ok: true,
+      launchers,
+    });
+
+  } catch (error) {
+    console.log(error);
+    
+    return res.status(error.status || 500).json({
+      ok: false,
+      message: error.message,
+    });
+  }
+};
+
+export const getByIdHandler = async (req, res) => {
+  try {
+    const {id} = req.params
+    
+    const launcher = await getByIdService(id)
+
+    return res.status(200).json({
+      ok: true,
+      launcher,
+    })
+    
+  } catch (error) {
+    console.log(error);
+    
+    return res.status(error.status || 500).json({
+      ok: false,
+      message: error.message
+    })
+  }
+}
