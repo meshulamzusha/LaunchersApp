@@ -46,13 +46,22 @@ export const getByIdService = async (id) => {
       throw error;
     }
 
-    return launcher
-    
+    return launcher;
   } catch (err) {
     console.log(err);
-    
+
     const error = new Error("Failed to obtain launcher.");
     error.status = 500;
     throw error;
+  }
+};
+
+export const deleteByIdService = async (id) => {
+  try {
+    await Launcher.findByIdAndDelete(id)
+  } catch (error) {
+    console.log(error);
+    
+    return error
   }
 };
