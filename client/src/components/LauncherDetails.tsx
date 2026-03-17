@@ -1,18 +1,13 @@
-import { useParams } from "react-router-dom";
-import { useLaunchers } from "../stores/launchers.store";
-import { Launcher } from "../types/launchers.types";
+import { ComponentProps } from "../types/launchers.types";
 
-const LauncherDetails = (launcher: Launcher) => {
-  const getById = useLaunchers((state)=> state.getById)
-  const launcherId = useParams()
-  const launcher = getById(launcherId)
+const LauncherDetails = ({ launcher }: ComponentProps) => {
   return (
     <div>
       {Object.entries(launcher).map(([k, v]) => {
         return (
           k == "__v" ||
           k == "_id" || (
-            <div>
+            <div key={k}>
               {k}:{v}
             </div>
           )

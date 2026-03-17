@@ -14,3 +14,7 @@ export type LaunchersState = {
   addLauncher: (launcher: Launcher) => Promise<void>;
   getById: (id: string) => Launcher | undefined
 };
+
+export type ComponentProps = {
+  launcher: Launcher
+}

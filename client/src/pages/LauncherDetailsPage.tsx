@@ -1,10 +1,20 @@
+import { useParams } from "react-router-dom";
 import LauncherDetails from "../components/LauncherDetails";
-import { Launcher } from "../types/launchers.types";
+import { useLaunchers } from "../stores/launchers.store";
 
-const LauncherDetailsPage = (launcher: Launcher) => {
+const LauncherDetailsPage = () => {
+  const getById = useLaunchers((state) => state.getById);
+  const {id} = useParams()
+  if (!id) {
+    return null
+  }
+  const launcher = getById(id)
+  if (!launcher) {
+    return null
+  }
   return (
     <div>
-      <LauncherDetails {...launcher} />
+      <LauncherDetails launcher={launcher} />
     </div>
   );
 };
