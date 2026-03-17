@@ -56,3 +56,18 @@ export const loginService = async (username, password) => {
     throw err;
   }
 };
+
+export const deleteUserService = async (id) => {
+  try {
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      const error = new Error("User deleting failed");
+      error.status = 500;
+      throw error;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
