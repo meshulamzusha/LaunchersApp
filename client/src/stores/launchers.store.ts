@@ -19,6 +19,6 @@ export const useLaunchers = create<LaunchersState>((set, get) => ({
   },
   addLauncher: async () => {},
   getById: (id: string) => {
-    return get(launchers).find((l: Launcher) => l._id == id);
+    return get().launchers.find((l: Launcher) => l._id == id);
   },
 }));
