@@ -37,9 +37,6 @@ export const loginService = async (username, password) => {
       { lastLogin: new Date().toLocaleString() },
     );
 
-    console.log(updatedUser);
-    
-
     const token = jwt.sign(
       {
         username: updatedUser.username,
