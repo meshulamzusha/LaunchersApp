@@ -6,7 +6,10 @@ export const useLaunchers = create<LaunchersState>((set, get) => ({
   launchers: [],
   fetchLaunchers: async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/launchers");
+      const token = localStorage.getItem("token")
+      const res = await fetch("http://localhost:3000/api/launchers",{
+        headers: {"authorization":`Bearer ${token}`}
+      });
       const result = await res.json();
 
       if (result.ok) {
