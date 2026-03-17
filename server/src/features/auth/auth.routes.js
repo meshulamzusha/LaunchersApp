@@ -1,16 +1,11 @@
-import express from "express";
-import {
-  createUserHandler,
-  deleteUserHandler,
-  loginHandler,
-} from "./auth.controller.js";
-import { roleGuard } from "../../middleware/role.middleware.js";
-import { jwtGuard } from "../../middleware/jwt.middleware.js";
+import express from "express"
+import { createUserHandler, loginHandler } from "./auth.controller.js"
+import { rbacGuard } from "../../middleware/role.middleware.js"
+import { jwtGuard } from "../../middleware/jwt.middleware.js"
 
-const router = express.Router();
+const router = express.Router()
 
-router.post("/register/create", jwtGuard, roleGuard, createUserHandler);
-router.post("/login", loginHandler);
-router.delete("/register/delete/:id", jwtGuard, roleGuard, deleteUserHandler);
+router.post("/register/create",jwtGuard, rbacGuard("admin"), createUserHandler)
+router.post("/login", loginHandler)
 
-export default router;
+export default router
