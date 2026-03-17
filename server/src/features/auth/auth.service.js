@@ -48,7 +48,7 @@ export const loginService = async (username, password) => {
       { expiresIn: "1h" },
     );
 
-    return token;
+    return {token, user};
   } catch (error) {
     console.log(error);
     const err = new Error("Internal server error");
