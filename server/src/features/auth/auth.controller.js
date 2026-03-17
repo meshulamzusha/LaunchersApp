@@ -32,12 +32,13 @@ export const createUserHandler = async (req, res) => {
 export const loginHandler = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const token = await loginService(username, password);
+    const {token, user} = await loginService(username, password);
 
     return res.status(200).json({
       ok: true,
       message: "you successfully login",
       token,
+      user,
     });
   } catch (error) {
     console.log(error);
