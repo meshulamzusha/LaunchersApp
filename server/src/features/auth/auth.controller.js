@@ -1,4 +1,8 @@
-import { createUserService, loginService } from "./auth.service.js";
+import {
+  createUserService,
+  deleteUserService,
+  loginService,
+} from "./auth.service.js";
 
 export const createUserHandler = async (req, res) => {
   try {
@@ -40,6 +44,24 @@ export const loginHandler = async (req, res) => {
     return res.status(error.status || 500).json({
       ok: false,
       massage: error.massage,
+    });
+  }
+};
+
+export const deleteUserHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await deleteUserService(id);
+
+    return res.status(200).json({
+      ok: true,
+      message: "User deleted successfully.",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(error.status || 500).json({
+      ok: false,
+      message: error.message,
     });
   }
 };
