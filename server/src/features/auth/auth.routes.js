@@ -7,6 +7,6 @@ const router = express.Router()
 
 router.post("/register/create",jwtGuard, rbacGuard("admin"), createUserHandler)
 router.post("/login", loginHandler)
-router.get("/getUser", jwtGuard, getUserHandler) < input;
+router.get("/getUser", jwtGuard, getUserHandler);
 
 export default router
